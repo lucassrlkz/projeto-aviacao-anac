@@ -1,4 +1,8 @@
 # Databricks notebook source
+# /// script
+# [tool.databricks.environment]
+# environment_version = "5"
+# ///
 # MAGIC %md
 # MAGIC # Silver — espelho governado do bronze
 # MAGIC
@@ -74,6 +78,11 @@ display(spark.sql("""
 # MAGIC `minutos_recuperados`. São subtrações entre colunas da própria linha. Não têm
 # MAGIC limiar, não classificam nada, não escondem número mágico — e, principalmente,
 # MAGIC não impedem análise nenhuma. Por isso podem morar aqui.
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC CREATE SCHEMA IF NOT EXISTS voebem.silver
 
 # COMMAND ----------
 
@@ -458,7 +467,7 @@ TABELAS = {
 
 for tabela, (comentario, tags) in TABELAS.items():
     spark.sql(f"COMMENT ON TABLE {tabela} IS '{comentario}'")
-    pares = ", ".join(f"'{k}' = '{v}'" for k, v in tags.items())
+    pares = ", ".join(f"'{key}' = '{value}'" for key, value in tags.items())
     spark.sql(f"ALTER TABLE {tabela} SET TAGS ({pares})")
     print(f"{tabela}: comentario + {len(tags)} tags")
 
