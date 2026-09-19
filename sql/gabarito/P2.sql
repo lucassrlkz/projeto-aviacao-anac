@@ -7,5 +7,5 @@ SELECT
                            SUM(CASE WHEN partida_pontual IS NOT NULL THEN 1 ELSE 0 END)), 2) AS pct_atrasados
 FROM voebem.gold.obt_voos
 WHERE hora_partida_prevista IS NOT NULL
-GROUP BY 1
-ORDER BY 1
+GROUP BY hora_partida_prevista
+ORDER BY hora_partida_prevista
