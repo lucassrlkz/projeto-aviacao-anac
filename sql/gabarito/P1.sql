@@ -10,7 +10,7 @@ SELECT
                            SUM(CASE WHEN partida_pontual IS NOT NULL THEN 1 ELSE 0 END)), 2) AS pct_atrasados
 FROM voebem.gold.obt_voos
 WHERE pais_origem = 'Brasil'
-GROUP BY 1, 2, 3
+GROUP BY nome_aeroporto_origem, municipio_origem, uf_origem
 HAVING COUNT(*) >= 5000
 ORDER BY pct_atrasados DESC
 LIMIT 10
