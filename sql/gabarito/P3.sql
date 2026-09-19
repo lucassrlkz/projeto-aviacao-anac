@@ -7,6 +7,6 @@ SELECT
                            SUM(CASE WHEN partida_pontual IS NOT NULL THEN 1 ELSE 0 END)), 2) AS pct_pontuais,
   ROUND(AVG(atraso_partida_min), 2)                                          AS atraso_medio_min
 FROM voebem.gold.obt_voos
-GROUP BY 1
+GROUP BY nome_companhia
 HAVING COUNT(*) >= 10000
 ORDER BY pct_pontuais DESC
